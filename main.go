@@ -6,9 +6,13 @@ import (
 	"sort"
 )
 
+// ballsAreSortable returns true if there is a solution to sort balls
+// using swapping operation in different containers
 func ballsAreSortable(containers [][]int) bool {
 	numOfBallsWithColor := make([]int, len(containers))
 	numOfBallsInContainer := make([]int, len(containers))
+
+	// Calculate sums of rows and columns
 	for i := 0; i < len(containers); i++ {
 		numOfBallsInContainer[i] = 0
 		numOfBallsWithColor[i] = 0
@@ -18,10 +22,13 @@ func ballsAreSortable(containers [][]int) bool {
 		}
 	}
 
+	// Sorting slices to find the correct container order
 	sort.Ints(numOfBallsWithColor)
 	sort.Ints(numOfBallsInContainer)
 
+	// Comparing slices (sums of balls by color and containers)
 	for i := 0; i < len(containers); i++ {
+		// Check if sums are equal
 		if numOfBallsInContainer[i] != numOfBallsWithColor[i] {
 			return false
 		}
@@ -51,6 +58,4 @@ func main() {
 	} else {
 		fmt.Println("no")
 	}
-
-	fmt.Println()
 }
